@@ -24,5 +24,4 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource('tags', "TagsController");
 Route.resource('tools', "ToolsController");

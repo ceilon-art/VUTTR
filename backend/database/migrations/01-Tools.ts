@@ -1,4 +1,5 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class Tools extends BaseSchema {
   protected tableName = 'tools'
@@ -7,15 +8,9 @@ export default class Tools extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
       table.string('title').notNullable()
-      table.string('description').nullable()
       table.string('link').nullable()
-
-      table
-        .foreign('tags_id')
-        .references('id')
-        .inTable('tags')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
+      table.text('description').nullable()
+      table.specificType('tags', Env.get('DB_CONNECTION') === 'sqlite' ? 'character varying(255)' : 'character varying(255)[]')
       table.timestamps(true)
     })
   }

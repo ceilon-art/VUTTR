@@ -11,7 +11,7 @@ export default class ToolsController {
 
   public async store({ response, request }) {
     const tools = await Tools.create(request.only([
-      'title', 'description', 'link', 'tags_id'
+      'title', 'description', 'link', '[tags]'
     ]));
 
     response.status(200).json(tools);
@@ -22,7 +22,7 @@ export default class ToolsController {
 
     if (tools) {
       tools.merge(request.only([
-        'title', 'description', 'link', 'tags_id'
+        'title', 'description', 'link', '[tags]'
       ]))
       tools.save()
     }

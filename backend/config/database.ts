@@ -20,7 +20,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   | file.
   |
   */
-  connection: Env.get('DB_CONNECTION', 'mysql') as string,
+  connection: Env.get('DB_CONNECTION', 'pg') as string,
 
   connections: {
     /*
@@ -34,8 +34,8 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     | npm i mysql
     |
     */
-    mysql: {
-      client: 'mysql',
+    pg: {
+      client: 'pg',
       connection: {
         host: Env.get('MYSQL_HOST'),
         port: Env.get('MYSQL_PORT'),
@@ -44,7 +44,6 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
         database: Env.get('MYSQL_DB_NAME'),
       },
       healthCheck: false,
-			debug: false,
     },
 
   },

@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Tags from './Tags'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Tools extends BaseModel {
   @column({ isPrimary: true })
@@ -15,11 +14,8 @@ export default class Tools extends BaseModel {
   @column()
   public link: string
 
-  @column({ columnName: "tags_id" })
-  public tagsId: number
-
-  @hasMany(() => Tags)
-  public tags: HasMany<typeof Tags>
+  @column()
+  public tags: JSON
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -29,6 +25,6 @@ export default class Tools extends BaseModel {
 
   public static $columns: Pick<
     Tools,
-    "id" | "title" | "description" | "link" | "tagsId" | "tags" | "createdAt" | "updatedAt"
+    "id" | "title" | "description" | "link" | "tags" | "createdAt" | "updatedAt"
   >
 }
