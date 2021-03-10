@@ -20,8 +20,27 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+// User Routes ***************************************************************
 
-Route.resource('tools', "ToolsController");
+// Create User
+Route.post('/user', 'UserController.store');
+// Update User
+Route.put('/user', 'UserController.update').middleware('auth');
+// Delete User
+Route.delete('/user', 'UserController.destroy').middleware('auth');
+
+// Session Routes ***************************************************************
+
+// Create Session
+Route.post('/session', 'SessionController.store');
+
+// Tool Routes ***************************************************************
+
+// List Tools
+Route.get('/tools', "ToolsController.index").middleware('auth');
+// Create Tool
+Route.post('/tools', "ToolsController.store").middleware('auth');
+// Update Tool
+Route.put('/tools/:id', "ToolsController.update").middleware('auth');
+// Delete Tool
+Route.delete('/tools/:id', "ToolsController.destroy").middleware('auth');

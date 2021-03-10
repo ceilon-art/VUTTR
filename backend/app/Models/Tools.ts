@@ -1,9 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import User from './User'
 
 export default class Tools extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+  
+  @column({ columnName: 'user_id' })
+  public userId: number
 
   @column()
   public title: string
@@ -15,7 +19,10 @@ export default class Tools extends BaseModel {
   public link: string
 
   @column()
-  public tags: JSON
+  public tags: string[]
+
+  @belongsTo(() => User)
+  public users: BelongsTo<typeof User> 
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
