@@ -1,7 +1,6 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Hash from '@ioc:Adonis/Core/Hash'
-import Redis from '@ioc:Adonis/Addons/Redis'
 import User from "App/Models/User";
 
 export default class UsersController {
@@ -41,10 +40,10 @@ export default class UsersController {
 
     const user = await auth.user;
 
-    const passwordCheck = await Hash.verify(password, user.password);
+    const passwordCheck = await Hash.verify(user.password, password);
 
     if (!passwordCheck) {
-      response.status(400).json({ error: "Invalid passwprd" })
+      response.status(400).json({ error: "Invalid password" })
       return;
     }
 
@@ -69,21 +68,15 @@ export default class UsersController {
       return;
     }
 
-    const user = await auth.getUser();
-    const passwordCheck = await Hash.verify(password, user.password)
+    const user = await auth.user;
+    const passwordCheck = await Hash.verify(user.password, password)
 
     if (!passwordCheck) {
       response.status(400).json({ error: "Invalid password" })
+      return;
+    } else {
+      await user.delete();
+      return response.status(200).json({ message: "User deleted with success" });
     }
-
-    Redis.keys(`tools:user=${user.id}:*`).then(function (keys) {
-      let pipeline = Redis.pipeline()
-      keys.forEach(function (key) {
-        pipeline.unlink(key)
-      })
-      return pipeline.exec()
-    })
-
-    await user.delete();
   }
 }
