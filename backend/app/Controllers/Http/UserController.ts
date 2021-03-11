@@ -39,7 +39,7 @@ export default class UsersController {
       return;
     }
 
-    const user = await auth.getUser();
+    const user = await auth.user;
 
     const passwordCheck = await Hash.verify(password, user.password);
 

@@ -41,6 +41,6 @@ Route.get('/tools', "ToolsController.index").middleware('auth');
 // Create Tool
 Route.post('/tools', "ToolsController.store").middleware('auth');
 // Update Tool
-Route.put('/tools/:id', "ToolsController.update").middleware('auth');
+Route.put('/tools', "ToolsController.update").middleware('auth');
 // Delete Tool
 Route.delete('/tools/:id', "ToolsController.destroy").middleware('auth');

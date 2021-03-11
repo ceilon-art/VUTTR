@@ -7,7 +7,7 @@ export default class Tools extends BaseModel {
   public id: number
   
   @column({ columnName: 'user_id' })
-  public userId: number
+  public user_id: number
 
   @column()
   public title: string
