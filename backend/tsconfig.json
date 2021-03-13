@@ -31,7 +31,8 @@
       "@adonisjs/lucid",
       "@adonisjs/redis",
       "@adonisjs/auth",
-      "@adonisjs/session"
+      "@adonisjs/session",
+      "adonis5-swagger"
     ]
   }
 }
