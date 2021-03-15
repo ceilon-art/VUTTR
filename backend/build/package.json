@@ -15,6 +15,7 @@
     "@types/jsdom": "^16.2.7",
     "@types/supertest": "^2.0.10",
     "adonis-preset-ts": "^2.0.0",
+    "adonis-swagger": "^1.2.9",
     "adonis5-swagger": "^1.2.1",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
