@@ -19,7 +19,6 @@ const sessionConfig: SessionConfig = {
   |
   | - cookie (Uses signed cookies to store session values)
   | - file (Uses filesystem to store session values)
-  | - redis (Uses redis. Make sure to install "@adonisjs/redis" as well)
   |
   | Note: Switching drivers will make existing sessions invalid.
   |

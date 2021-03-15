@@ -22,7 +22,6 @@
     "./providers/AppProvider",
     "@adonisjs/core",
     "@adonisjs/lucid",
-    "@adonisjs/redis",
     "@adonisjs/auth",
     "@adonisjs/session",
     "adonis5-swagger"
