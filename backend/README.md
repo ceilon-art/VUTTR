@@ -11,6 +11,8 @@ Tools used
 Usage
 
     Install dependencies:
+    
+yarn install
 
 yarn
 
