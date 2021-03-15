@@ -10,23 +10,19 @@ Tools used
 
 Usage
 
-    Install dependencies:
-    
-yarn install
+    Install dependencies: yarn install
 
-yarn
+Run migrations: 
 
-    Run migrations:
+    node ace migration:run
 
-node ace migration:run
+Generate APP_KEY:
 
-    Generate APP_KEY:
+    node ace key:generate
 
-node ace key:generate
+Start local dev server:
 
-    Start local dev server:
-
-node ace serve --watch
+    node ace serve --watch
 
 Extra steps
 
