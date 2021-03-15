@@ -7,7 +7,6 @@ Tools used
     npm
     yarn
     AdonisJS v5
-    Docker
 
 Usage
 
