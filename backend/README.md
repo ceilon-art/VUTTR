@@ -14,10 +14,6 @@ Usage
 
 yarn
 
-    Install adonis:
-
-npm i -g @adonisjs/cli
-
     Run migrations:
 
 node ace migration:run
@@ -33,9 +29,5 @@ node ace serve --watch
 Extra steps
 
     Create your own ".env" file based on ".env.example"
-    Visit the swagger documentation on http://localhost:3000/docs or https://very-useful-tools-to-remember.herokuapp.com/docs
-    Get the "swagger.json" file on http://localhost:3000/swagger.json or https://very-useful-tools-to-remember.herokuapp.com/swagger.json
-
-Live version
-
-    The live version of the VUTTR website is hosted on https://vuttr-frontend.netlify.app
+    Visit the swagger documentation on http://localhost:3000/docs
+    Get the "swagger.json" file on http://localhost:3000/swagger.json
