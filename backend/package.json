@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node ace build --production",
-    "start": "node server.js",
+    "start": "node build/server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
@@ -14,6 +14,7 @@
     "@adonisjs/assembler": "^3.0.0",
     "@types/jsdom": "^16.2.7",
     "@types/proxy-addr": "^2.0.0",
+    "@types/source-map-support": "^0.5.3",
     "@types/supertest": "^2.0.10",
     "adonis-preset-ts": "^2.0.0",
     "adonis5-swagger": "^1.2.1",
