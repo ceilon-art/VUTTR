@@ -10,32 +10,22 @@ Tools used
 
 Usage
 
-    Install dependencies:
+    Install dependencies: yarn install
 
-yarn
+Run migrations: 
 
-    Install adonis:
+    node ace migration:run
 
-npm i -g @adonisjs/cli
+Generate APP_KEY:
 
-    Run migrations:
+    node ace key:generate
 
-node ace migration:run
+Start local dev server:
 
-    Generate APP_KEY:
-
-node ace key:generate
-
-    Start local dev server:
-
-node ace serve --watch
+    node ace serve --watch
 
 Extra steps
 
     Create your own ".env" file based on ".env.example"
-    Visit the swagger documentation on http://localhost:3000/docs or https://very-useful-tools-to-remember.herokuapp.com/docs
-    Get the "swagger.json" file on http://localhost:3000/swagger.json or https://very-useful-tools-to-remember.herokuapp.com/swagger.json
-
-Live version
-
-    The live version of the VUTTR website is hosted on https://vuttr-frontend.netlify.app
+    Visit the swagger documentation on http://localhost:3000/docs
+    Get the "swagger.json" file on http://localhost:3000/swagger.json
