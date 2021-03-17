@@ -32,3 +32,7 @@ export const Login = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const LoginText = styled.p`
+  margin-left: 25px;
+`;

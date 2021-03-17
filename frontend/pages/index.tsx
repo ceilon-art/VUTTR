@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 import NavBar from '../components/NavBar';
-import LoginButton from '../components/LoginButton';
 import {
   Container,
   Section,
@@ -11,7 +10,9 @@ import {
   Try,
   SideText,
   Author,
-} from './styles';
+  Button,
+  TextAccount
+} from '../styles/IndexStyles';
 
 const Home: React.FC = () => {
   return (
@@ -43,11 +44,11 @@ const Home: React.FC = () => {
             It takes 30 seconds to create your account, and the software is
             completely free
           </p>
-          <Link href="/createaccount">
-            <LoginButton color="#10B26C" hover="#12DB89">
-              Create account
-            </LoginButton>
-          </Link>
+          <Button>
+            <Link href="/createAccount">
+              <TextAccount>Create account</TextAccount>
+            </Link>
+          </Button>
         </SideText>
       </Try>
       <Author>

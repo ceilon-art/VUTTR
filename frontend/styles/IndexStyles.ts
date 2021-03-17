@@ -127,3 +127,25 @@ export const Author = styled.div`
     }
   }
 `;
+
+export const Button = styled.button`
+  width: 174px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #10B26C;
+  border-radius: 8px;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #12DB89;
+  }
+`;
+
+export const TextAccount = styled.p`
+  margin-bottom: 60px;
+  margin-top: -5px;
+  color: white;
+`;
