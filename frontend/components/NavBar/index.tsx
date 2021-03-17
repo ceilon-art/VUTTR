@@ -1,22 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import LoginButton from '../LoginButton';
 import { Container, Header, Login } from './styles';
-import bossaBox from '../../assets/bossabox.svg';
 
 const Home: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Link to="/">
-          <img src={bossaBox} alt="Logo Bossabox" />
+        <Link href="/">
+          <img src='/bossabox.svg' alt="Logo Bossabox" />
         </Link>
         <Login>
-          <Link to="createaccount">
+          <Link href="createAccount">
             <p>Create account</p>
           </Link>
-          <Link to="login">
+          <Link href="login">
             <LoginButton>Login</LoginButton>
           </Link>
         </Login>

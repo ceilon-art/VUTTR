@@ -1,19 +1,19 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+// /* eslint-disable react/jsx-props-no-spreading */
+// import React from 'react';
+// import { Route, Redirect, RouteProps } from 'next/router';
 
-import { useUser } from '../../context/user';
-import { useToast } from '../../context/toast';
+// import { useUser } from '../../context/user';
+// import { useToast } from '../../context/toast';
 
-const PrivateRoute: React.FC<RouteProps> = ({ ...rest }) => {
-  const { jwt } = useUser();
-  const { toast } = useToast();
+// const PrivateRoute: React.FC<RouteProps> = ({ ...rest }) => {
+//   const { jwt } = useUser();
+//   const { toast } = useToast();
 
-  if (jwt === '') {
-    toast('Please login first', 'warning');
-    return <Redirect to="/login" />;
-  }
-  return <Route {...rest} />;
-};
+//   if (jwt === '') {
+//     toast('Please login first', 'warning');
+//     return <Redirect to="/login" />;
+//   }
+//   return <Route {...rest} />;
+// };
 
-export default PrivateRoute;
+// export default PrivateRoute;

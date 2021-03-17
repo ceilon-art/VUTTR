@@ -11,13 +11,6 @@ export interface BannerProps {
   type: 'success' | 'warning' | 'info' | 'error';
 }
 
-export const mapTypeToSVG = {
-  success: successSVG,
-  warning: warningSVG,
-  error: errorSVG,
-  info: infoSVG,
-};
-
 export const mapTypeToTitle = {
   success: 'Success!',
   warning: 'Ops!',
