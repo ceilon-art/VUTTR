@@ -36,6 +36,7 @@ const App: React.FC = () => {
     'update',
   );
   const [response, setResponse] = useState<ResponseData>({} as ResponseData);
+  const [toolsData, setToolsData] = useState<ToolData[]>([]);
   const [selectedTool, setSelectedTool] = useState<ToolData>({} as ToolData);
   const [formTitle, setFormTitle] = useState('');
   const [formLink, setFormLink] = useState('');
@@ -51,22 +52,20 @@ const App: React.FC = () => {
 
     async function fetchData() {
       try {
-        const response = await api.get<ResponseData>('/tools');
-        setResponse(response.data);
+        const request = await api.get(`/tools?page=${page}`);
+        setToolsData(request.data);
         setLoading(0);
-        console.log(response.data)
       } catch (err) {
-        console.log(err)
-        // if (err.response?.data?.error?.status === 401) {
-        //   clearLocalStorage();
-        //   toast('Your session has expired, please login again', 'warning');
-        //   // router.push('/login');
-        // } else {
-        //   clearLocalStorage();
-        //   toast('The server is offline, please try again later', 'error');
-        //   // router.push('/login');
-        // }
-        // setLoading(0);
+        if (err.request?.data?.error?.status === 401) {
+          clearLocalStorage();
+          toast('Your session has expired, please login again', 'warning');
+          router.push('/login');
+        } else {
+          clearLocalStorage();
+          toast('The server is offline, please try again later', 'error');
+          router.push('/login');
+        }
+        setLoading(0);
       }
     }
 
@@ -226,6 +225,7 @@ const App: React.FC = () => {
           .then((res) => {
             const { data } = res;
             const fakeResponse = { data };
+            // @ts-ignore
             setResponse(fakeResponse as ResponseData);
             setPage(1);
             setLastPage(1);
@@ -368,9 +368,11 @@ const App: React.FC = () => {
       <Container isModalOpen={modal}>
         <NavBar>
           <img src='/bossabox.svg' alt="Logo Bossabox" />
-          <Link href="profile">
-            <ProfileButton>Profile</ProfileButton>
-          </Link>
+          <ProfileButton>
+            <Link href="profile">
+                Profile
+            </Link>
+          </ProfileButton>
         </NavBar>
         <Section>
           <h1>VUTTR</h1>
@@ -393,7 +395,7 @@ const App: React.FC = () => {
             </AddNewTool>
           </Buttons>
           {loading === 0 ? (
-            response?.data?.map((tool) => (
+            toolsData.map((tool) => (
               <Tool key={tool.id}>
                 <TitleFlexbox>
                   <div onClick={(): void => handleOpenUpdateModal(tool)}>

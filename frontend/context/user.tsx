@@ -26,6 +26,7 @@ export const UserProvider: React.FC = ({ children }) => {
       const userData = localStorage.getItem('@vuttr:user');
 
       setToken(userToken)
+      // @ts-ignore
       setSavedUser(userData);
     }
 
@@ -36,6 +37,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
   const clearLocalStorage = useCallback(() => {
     setJwtToken('');
+    // @ts-ignore
     setUserData({});
     localStorage.clear();
   }, []);

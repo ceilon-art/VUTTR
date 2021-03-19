@@ -52,5 +52,10 @@ export interface ResponseData {
   perPage: number;
   page: number;
   lastPage: number;
-  data: ToolData[];
+}
+
+export interface UserData {
+  id: number;
+  name: string;
+  email: string;
 }

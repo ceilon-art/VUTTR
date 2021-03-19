@@ -3,14 +3,12 @@
 import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { UserData } from '../../utils/Interfaces';
 
 import { useToast } from '../../context/toast';
 import { useUser } from '../../context/user';
 import api from '../../utils/api';
 import Button from '../../components/LoginButton';
-import back from '../../assets/back.svg';
-import bossabox from '../../assets/bossabox.svg';
-import x from '../../assets/x.svg';
 import {
   Container,
   Form,
@@ -20,12 +18,6 @@ import {
   ModalContainer,
   ModalButton,
 } from './styles';
-
-interface UserData {
-  id: number;
-  name: string;
-  email: string;
-}
 
 const Profile: React.FC = () => {
   const [loading, setLoading] = useState(0);
@@ -38,7 +30,7 @@ const Profile: React.FC = () => {
   const handleLogout = useCallback(() => {
     clearLocalStorage();
     router.push('/');
-  }, [clearLocalStorage, history]);
+  }, [clearLocalStorage, router]);
 
   const handleDeleteAccount = useCallback(() => {
     const inputs = document.getElementsByTagName('input');
@@ -69,7 +61,7 @@ const Profile: React.FC = () => {
         setLoading(0);
         setModal(0);
       });
-  }, [clearLocalStorage, history, jwt, toast]);
+  }, [clearLocalStorage, router, jwt, toast]);
 
   const onHandleSubmit = useCallback(
     (event) => {
@@ -144,7 +136,7 @@ const Profile: React.FC = () => {
     <>
       <ModalContainer isModalOpen={modal}>
         <button type="button" onClick={(): void => setModal(0)}>
-          <img src={x} alt="" />
+          <img src='/x.svg' alt="" />
         </button>
         <h2>Confirm password to delete account</h2>
         <input type="password" name="password" placeholder="password" />
@@ -157,14 +149,14 @@ const Profile: React.FC = () => {
         </ModalButton>
       </ModalContainer>
       <Container isModalOpen={modal}>
-        <Link href="/app">
+        <Link href="/main">
           <GoBack>
-            <img src={back} alt="Go back to the app" />
+            <img src='/back.svg' alt="Go back to the app" />
             <p>App</p>
           </GoBack>
         </Link>
         <ProfileSection>
-          <img src={bossabox} alt="Logo bossabox" />
+          <img src='/bossabox.svg' alt="Logo bossabox" />
           <h1>{user.name}</h1>
         </ProfileSection>
         <Form onSubmit={onHandleSubmit}>
