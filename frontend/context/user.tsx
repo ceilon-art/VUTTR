@@ -1,41 +1,38 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, { 
+  createContext, 
+  useState, 
+  useContext, 
+  useCallback, 
+  useEffect 
+} from 'react';
 
-interface UserData {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface UserContextData {
-  jwt: string;
-  setJwt(jwt: string): void;
-  clearLocalStorage(): void;
-  user: UserData;
-  setUser(userObj: UserData): void;
-}
+import { UserContextData, UserData } from '../utils/Interfaces';
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider: React.FC = ({ children }) => {
-  const [jwt, setJwtToken] = useState<string>(() => {
-    const savedJwt = localStorage.getItem('@vuttr:jwt');
+  const [token, setToken] = useState('');
+  const [savedUser, setSavedUser] = useState({
+    id: 0,
+    name: '',
+    email: ''
+  });
+  const [jwt, setJwtToken] = useState<string>(token);
+  const [user, setUserData] = useState(savedUser);
+  
+  useEffect(() => {
+    function fetchData() {
+      const userToken = localStorage.getItem('@vuttr:jwt');
+      const userData = localStorage.getItem('@vuttr:user');
 
-    if (!savedJwt) {
-      return '';
+      setToken(userToken)
+      setSavedUser(userData);
     }
 
-    return savedJwt;
-  });
+    fetchData();
+  }, [])
 
-  const [user, setUserData] = useState(() => {
-    const savedUser = localStorage.getItem('@vuttr:user');
 
-    if (!savedUser) {
-      return {};
-    }
-
-    return JSON.parse(savedUser);
-  });
 
   const clearLocalStorage = useCallback(() => {
     setJwtToken('');

@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import api from '../../utils/api';
 import { useUser } from '../../context/user';
 import { useToast } from '../../context/toast';
+import { ToolData, ResponseData } from '../../utils/Interfaces';
 
 import ProfileButton from '../../components/LoginButton';
 import {
@@ -24,23 +25,6 @@ import {
   ModalContainer,
   Pagination,
 } from './styles';
-
-interface ToolData {
-  id: number;
-  user_id: number;
-  title: string;
-  link: string;
-  description: string;
-  tags: string[];
-}
-
-interface ResponseData {
-  total: string;
-  perPage: number;
-  page: number;
-  lastPage: number;
-  data: ToolData[];
-}
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(1);
@@ -65,31 +49,28 @@ const App: React.FC = () => {
   useEffect(() => {
     setLoading(1);
 
-    api
-      .get<ResponseData>(`/tools?page=${page}`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then((res) => {
-        const { data } = res;
-        setResponse(data);
-        setLastPage(data.lastPage === 0 ? 1 : data.lastPage);
-        setPageArray(
-          new Array(data.lastPage === 0 ? 1 : data.lastPage).fill(0),
-        );
+    async function fetchData() {
+      try {
+        const response = await api.get<ResponseData>('/tools');
+        setResponse(response.data);
         setLoading(0);
-      })
-      .catch((err) => {
-        if (err.response?.data?.error?.status === 401) {
-          clearLocalStorage();
-          toast('Your session has expired, please login again', 'warning');
-          router.push('/login');
-        } else {
-          clearLocalStorage();
-          toast('The server is offline, please try again later', 'error');
-          router.push('/login');
-        }
-        setLoading(0);
-      });
+        console.log(response.data)
+      } catch (err) {
+        console.log(err)
+        // if (err.response?.data?.error?.status === 401) {
+        //   clearLocalStorage();
+        //   toast('Your session has expired, please login again', 'warning');
+        //   // router.push('/login');
+        // } else {
+        //   clearLocalStorage();
+        //   toast('The server is offline, please try again later', 'error');
+        //   // router.push('/login');
+        // }
+        // setLoading(0);
+      }
+    }
+
+    fetchData();
   }, [jwt, page, clearLocalStorage, router, toast]);
 
   const reload = useCallback(
@@ -412,7 +393,7 @@ const App: React.FC = () => {
             </AddNewTool>
           </Buttons>
           {loading === 0 ? (
-            response.data.map((tool) => (
+            response?.data?.map((tool) => (
               <Tool key={tool.id}>
                 <TitleFlexbox>
                   <div onClick={(): void => handleOpenUpdateModal(tool)}>

@@ -37,7 +37,8 @@ const Login: React.FC = () => {
           const { token, user } = response.data;
           setJwt(token);
           setUser(user);
-          router.push('app');
+          console.log(response.data)
+          router.push('main');
         })
         .catch((err) => {
           toast(

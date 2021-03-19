@@ -22,3 +22,35 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export interface ContainerProps {
   isModalOpen: number;
 }
+
+
+export interface UserData {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface UserContextData {
+  jwt: string;
+  setJwt(jwt: string): void;
+  clearLocalStorage(): void;
+  user: UserData;
+  setUser(userObj: UserData): void;
+}
+
+export interface ToolData {
+  id: number;
+  user_id: number;
+  title: string;
+  link: string;
+  description: string;
+  tags: string[];
+}
+
+export interface ResponseData {
+  total: string;
+  perPage: number;
+  page: number;
+  lastPage: number;
+  data: ToolData[];
+}
