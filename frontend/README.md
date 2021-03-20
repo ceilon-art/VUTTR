@@ -1,6 +1,7 @@
 VUTTR - Frontend
 
 This is the codebase for the frontend of VUTTR (Very Useful Tools to Remember), a coding challenge provided by Bossabox.
+
 Technologies used
 
     NextJs
@@ -8,19 +9,19 @@ Technologies used
     Styled components
     yarn
 
-Usage
+Usage:
 
-    Install dependencies:
+Install dependencies:
 
-yarn
+    yarn install
 
-    Run dev server:
+Run dev server:
 
-yarn start
+    yarn start
 
-    Create production build:
+Create production build:
 
-yarn build
+    yarn build
 
 Backend repo
 
