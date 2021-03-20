@@ -12,7 +12,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(0);
 
   const router = useRouter();
-  const { setJwt, setUser } = useUser();
+  const { setUser } = useUser();
   const { toast } = useToast();
 
   const onHandleSubmit = useCallback(
@@ -34,10 +34,8 @@ const Login: React.FC = () => {
           password: inputs[1].value,
         })
         .then((response) => {
-          const { token, user } = response.data;
-          setJwt(token);
+          const { user } = response.data;
           setUser(user);
-          console.log(response.data)
           router.push('main');
         })
         .catch((err) => {
@@ -49,7 +47,7 @@ const Login: React.FC = () => {
           setLoading(0);
         });
     },
-    [toast, router, setJwt, setUser],
+    [toast, router, setUser],
   );
 
   return (

@@ -44,7 +44,7 @@ const App: React.FC = () => {
   const [formTags, setFormTags] = useState('');
 
   const router = useRouter();
-  const { user, jwt, clearLocalStorage } = useUser();
+  const { user, clearLocalStorage } = useUser();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const App: React.FC = () => {
     }
 
     fetchData();
-  }, [jwt, page, clearLocalStorage, router, toast]);
+  }, [page, clearLocalStorage, router, toast]);
 
   const reload = useCallback(
     (pageParam = 1) => {
@@ -78,9 +78,7 @@ const App: React.FC = () => {
       setPage(pageParam);
 
       api
-        .get<ResponseData>(`/tools?page=${pageParam}`, {
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
+        .get<ResponseData>(`/tools?page=${pageParam}`)
         .then((res) => {
           const { data } = res;
           setResponse(data);
@@ -103,7 +101,7 @@ const App: React.FC = () => {
           setLoading(0);
         });
     },
-    [router, jwt, toast, clearLocalStorage],
+    [router, toast, clearLocalStorage],
   );
 
   const handleCreateTool = useCallback(() => {
@@ -122,9 +120,7 @@ const App: React.FC = () => {
     };
 
     api
-      .post('/tools', tool, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
+      .post('/tools', tool)
       .then(() => {
         toast('Tool created successfully', 'success');
         reload(page);
@@ -141,7 +137,6 @@ const App: React.FC = () => {
     formTags,
     formLink,
     toast,
-    jwt,
     reload,
     page,
   ]);
@@ -159,9 +154,7 @@ const App: React.FC = () => {
     setModal(0);
 
     api
-      .put('/tools', updatedTool, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
+      .put('/tools', updatedTool)
       .then(() => {
         toast('Tool updated successfully', 'success');
         reload(page);
@@ -181,7 +174,6 @@ const App: React.FC = () => {
     formTags,
     formLink,
     toast,
-    jwt,
     reload,
     page,
   ]);
@@ -191,9 +183,7 @@ const App: React.FC = () => {
     setModal(0);
 
     api
-      .delete(`/tools/${selectedTool.id}`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
+      .delete(`/tools/${selectedTool.id}`)
       .then(() => {
         toast(`Tool ${selectedTool.title} deleted successfully`, 'success');
         reload();
@@ -206,7 +196,7 @@ const App: React.FC = () => {
         );
         setLoading(0);
       });
-  }, [selectedTool, toast, jwt, reload]);
+  }, [selectedTool, toast, reload]);
 
   const handleSearchTag = useCallback(
     (e) => {
@@ -219,9 +209,7 @@ const App: React.FC = () => {
         }
 
         api
-          .get(`/tools?tag=${formattedTags}`, {
-            headers: { Authorization: `Bearer ${jwt}` },
-          })
+          .get(`/tools?tag=${formattedTags}`)
           .then((res) => {
             const { data } = res;
             const fakeResponse = { data };
@@ -244,7 +232,7 @@ const App: React.FC = () => {
         reload(page);
       }
     },
-    [page, reload, jwt, toast],
+    [page, reload, toast],
   );
 
   const handleOpenUpdateModal = useCallback((tool: ToolData) => {

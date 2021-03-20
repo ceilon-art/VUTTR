@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
 
   const router = useRouter();
   const { toast } = useToast();
-  const { user, jwt, setUser, clearLocalStorage } = useUser();
+  const { user, setUser, clearLocalStorage } = useUser();
 
   const handleLogout = useCallback(() => {
     clearLocalStorage();
@@ -37,7 +37,6 @@ const Profile: React.FC = () => {
 
     api
       .delete('/user', {
-        headers: { Authorization: `Bearer ${jwt}` },
         data: { password: inputs[0].value },
       })
       .then(() => {
@@ -61,7 +60,7 @@ const Profile: React.FC = () => {
         setLoading(0);
         setModal(0);
       });
-  }, [clearLocalStorage, router, jwt, toast]);
+  }, [clearLocalStorage, router, toast]);
 
   const onHandleSubmit = useCallback(
     (event) => {
@@ -101,9 +100,7 @@ const Profile: React.FC = () => {
       }
 
       api
-        .put<UserData>('/user', requestBody, {
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
+        .put<UserData>('/user')
         .then((res) => {
           toast('User updated successfully', 'success');
           setUser(res.data);
@@ -129,7 +126,7 @@ const Profile: React.FC = () => {
           setLoading(0);
         });
     },
-    [toast, jwt, setUser, router, clearLocalStorage],
+    [toast, setUser, router, clearLocalStorage],
   );
 
   return (

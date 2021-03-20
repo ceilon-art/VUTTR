@@ -31,8 +31,6 @@ export interface UserData {
 }
 
 export interface UserContextData {
-  jwt: string;
-  setJwt(jwt: string): void;
   clearLocalStorage(): void;
   user: UserData;
   setUser(userObj: UserData): void;
